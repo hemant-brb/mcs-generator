@@ -1,0 +1,3 @@
+        if ($contract->has{{Field}}()) {
+            ${{_model}}->{{_field}} = $contract->get{{Field}}();
+        }

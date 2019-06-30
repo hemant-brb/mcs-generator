@@ -1,0 +1,19 @@
+<?php
+/**
+ * User: {{user}}
+ * Date: {{date}}
+ */
+
+namespace {{namespace}};
+
+
+use App\{{Model}};
+use League\Fractal\TransformerAbstract;
+
+class {{Model}}Transformer extends TransformerAbstract
+{
+
+    public function transform({{Model}} ${{_model}}){
+        {{body}}
+    }
+}

@@ -1,0 +1,82 @@
+<?php
+/**
+ * User: {{user}}
+ * Date: {{date}}
+ */
+
+namespace {{namespace}};
+
+
+use App\Api\V1\Exceptions\{{Model}}NotFoundException;
+use App\{{Model}};
+use App\Services\Contract\Create{{Model}}Contract;
+use App\Services\Contract\Update{{Model}}Contract;
+
+/**
+ * Class {{Model}}Service
+ * @package {{namespace}}
+ */
+class {{Model}}Service
+{
+
+    /**
+     * @param ${{_model}}Id
+     * @return {{Model}}
+     */
+    public static function find(${{_model}}Id) {
+        ${{_model}} = {{Model}}::find(${{_model}}Id);
+        if (!${{_model}}) {
+            throw new {{Model}}NotFoundException();
+        }
+        return ${{_model}};
+    }
+
+    /**
+     * @return {{Model}}[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function index() {
+        return {{Model}}::all();
+    }
+
+    /**
+     * @param ${{_model}}Id
+     * @return {{Model}}
+     */
+    public function show(${{_model}}Id) {
+        return self::find(${{_model}}Id);
+    }
+
+    /**
+     * @param Create{{Model}}Contract $contract
+     * @return {{Model}}
+     */
+    public function store(Create{{Model}}Contract $contract) {
+        ${{_model}} = new {{Model}}();
+        {{create_body}}
+        ${{_model}}->save();
+        return ${{_model}};
+    }
+
+    /**
+     * @param ${{_model}}Id
+     * @param Update{{Model}}Contract $contract
+     * @return {{Model}}
+     */
+    public function update(${{_model}}Id, Update{{Model}}Contract $contract) {
+        ${{_model}} = self::find(${{_model}}Id);
+        {{update_body}}
+        ${{_model}}->save();
+        return ${{_model}};
+    }
+
+    /**
+     * @param ${{_model}}Id
+     */
+    public function delete(${{_model}}Id) {
+        ${{_model}} = $this->find(${{_model}}Id);
+        try {
+            ${{_model}}->delete();
+        } catch (\Exception $e) {
+        }
+    }
+}

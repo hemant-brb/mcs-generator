@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Created by: {{user}}
+ * Date: {{date}}
+ */
+
+namespace {{namespace}};
+
+interface {{interface}}
+{
+{{body}}
+}

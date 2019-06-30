@@ -1,0 +1,78 @@
+<?php
+/**
+ * Created by: {{user}}
+ * Date: {{date}}
+ */
+
+
+namespace {{namespace}};
+
+
+use App\Transformers\{{Model}}Transformer;
+use App\Api\V1\Requests\Create{{Model}}Request;
+use App\Api\V1\Requests\Update{{Model}}Request;
+use App\Services\{{Model}}Service;
+
+/**
+ * Class {{Model}}Controller
+ * @package App\Api\V1\Controllers
+ *
+ * @property-read {{Model}}Service ${{var_service}}
+ */
+class {{Model}}Controller extends {{ParentController}}
+{
+    protected ${{var_service}};
+
+    public function __construct() {
+        $this->{{var_service}} = new {{Model}}Service();
+    }
+    
+    
+    /**
+     * @param {{Model}}Service $service
+     * @return \Dingo\Api\Http\Response
+     */
+    public function index({{Model}}Service $service) {
+        ${{_model}}s = $service->index();
+        return $this->response->collection(${{_model}}s, new {{Model}}Transformer());
+    }
+
+    /**
+     * @param $id
+     * @param {{Model}}Service $service
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show($id, {{Model}}Service $service) {
+        ${{_model}} = $service->show($id);
+        return $this->response->item(${{_model}}, new {{Model}}Transformer());
+    }
+
+    /**
+     * @param Create{{Model}}Request $request
+     * @param {{Model}}Service $service
+     * @return \Dingo\Api\Http\Response
+     */
+    public function store(Create{{Model}}Request $request, {{Model}}Service $service) {
+        ${{_model}} = $service->store($request);
+        return $this->response->item(${{_model}}, new {{Model}}Transformer());
+    }
+
+    /**
+     * @param Update{{Model}}Request $request
+     * @param $id
+     * @param {{Model}}Service $service
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update(Update{{Model}}Request $request, $id, {{Model}}Service $service) {
+        ${{_model}} = $service->update($id, $request);
+        return $this->response->item(${{_model}}, new {{Model}}Transformer());
+    }
+    
+    /**
+     * @param $id
+     * @param {{Model}}Service $service
+     */
+    public function destroy($id, {{Model}}Service $service) {
+        $service->delete($id);
+    }
+}

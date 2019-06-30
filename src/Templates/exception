@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Created by: {{user}}
+ * Date: {{date}}
+ */
+
+namespace {{namespace}};
+
+
+/**
+ * Class {{class}}
+ * @package {{namespace}}
+ */
+class {{class}} extends HttpException
+{
+    const ERROR_MESSAGE = '{{model}} not Found';
+
+    /**
+     * JobNotFoundException constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct(self::ERROR_MESSAGE, self::ERROR_NOT_FOUND, 404);
+    }
+}

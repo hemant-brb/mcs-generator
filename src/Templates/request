@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Created by: {{user}}
+ * Date: {{date}}
+ */
+
+namespace {{namespace}};
+
+use {{contract}} as Contract;
+
+/**
+ * Class {{class}}
+ * @package {{namespace}}
+ */
+class {{class}} extends {{ParentRequest}} implements Contract
+{
+{{body}}
+}

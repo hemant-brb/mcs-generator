@@ -1,0 +1,1 @@
+        ${{_model}}->{{_field}} = $contract->get{{Field}}();

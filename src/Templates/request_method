@@ -1,0 +1,5 @@
+    public function {{method_type}}{{Field}}()
+    {
+        return $this->{{method_type}}(self::{{CONST}});
+    }
+
