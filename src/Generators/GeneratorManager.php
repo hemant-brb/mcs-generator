@@ -9,9 +9,9 @@
 namespace Devslane\Generator\Generators;
 
 
-use Devslane\Generator\Services\ConfigHelper;
+use Devslane\Generator\Utils\ConfigHelper;
 use Devslane\Generator\Services\DBService;
-use Devslane\Generator\Services\Helpers;
+use Devslane\Generator\Utils\Helpers;
 use Doctrine\DBAL\Schema\Table;
 
 /**

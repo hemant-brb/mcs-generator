@@ -6,7 +6,7 @@
  * Time: 12:31
  */
 
-namespace Devslane\Generator\Services;
+namespace Devslane\Generator\Utils;
 
 
 use Doctrine\DBAL\Schema\Column;
@@ -16,6 +16,12 @@ use Illuminate\Support\Str;
 
 class Helpers
 {
+    /**
+     * @param $tableName
+     * @param null $suffix
+     * @param null $prefix
+     * @return string
+     */
     public static function getClassName($tableName, $suffix = null, $prefix = null) {
         $className = Str::studly(Str::singular($tableName));
         if ($prefix) {

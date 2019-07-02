@@ -9,7 +9,7 @@
 namespace Devslane\Generator\Generators;
 
 
-use Devslane\Generator\Services\Helpers;
+use Devslane\Generator\Utils\Helpers;
 use Doctrine\DBAL\Schema\Table;
 
 class GenerateSeeder extends Generator

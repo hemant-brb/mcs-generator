@@ -10,7 +10,7 @@ namespace Devslane\Generator\Generators;
 
 
 use Carbon\Carbon;
-use Devslane\Generator\Services\ConfigHelper;
+use Devslane\Generator\Utils\ConfigHelper;
 use Devslane\Generator\Services\FileSystemService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Str;

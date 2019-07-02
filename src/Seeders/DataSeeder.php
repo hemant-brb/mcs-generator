@@ -9,8 +9,8 @@
 
 namespace Devslane\Generator\Seeders;
 
-use Devslane\Generator\Services\ConfigHelper;
-use Devslane\Generator\Services\Helpers;
+use Devslane\Generator\Utils\ConfigHelper;
+use Devslane\Generator\Utils\Helpers;
 use Carbon\Carbon;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Table;
