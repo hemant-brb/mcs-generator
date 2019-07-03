@@ -70,7 +70,7 @@ return [
         'path'          => 'app/Api/V1/Controllers',
         'namespace'     => 'App\Api\V1\Controllers',
         'overwrite'     => true,
-        'parent'        => 'Controller',
+        'parent'        => 'BaseController',
         'exclude_table' => [
             'password_resets', 'migrations',
         ],
@@ -117,7 +117,6 @@ return [
         'path'          => 'app',
         'namespace'     => 'App',
         'overwrite'     => true,
-        'parent'        => 'BaseModel',
         'exclude_table' => [
             'password_resets'
         ],
@@ -132,7 +131,7 @@ return [
         'path'               => 'app/Api/V1/Requests',
         'namespace'          => 'App\Api\V1\Requests',
         'overwrite'          => true,
-        'parent'             => 'Request',
+        'parent'             => 'BaseRequest',
         'list_parent'        => 'ListRequest',
         'exclude_table'      => [
             'password_resets'

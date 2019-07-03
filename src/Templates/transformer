@@ -9,6 +9,7 @@ namespace {{namespace}};
 
 use App\{{Model}};
 use League\Fractal\TransformerAbstract;
+use Devslane\HelperUtil;
 
 class {{Model}}Transformer extends TransformerAbstract
 {

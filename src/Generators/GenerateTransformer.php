@@ -84,12 +84,12 @@ class GenerateTransformer extends Generator
         $data    = "";
         $model   = '$' . strtolower($this->model);
         foreach ($columns as $key => $column) {
-            if ($column->getNotnull()) { // is not nullable
-                // TODO
-            }
             switch ($column->getType()->getName()) {
                 case IntegerType::INTEGER:
-                    $data .= "\t\t\t'$key' => (int)$model->$key,\n";
+                    if ($column->getNotnull())
+                        $data .= "\t\t\t'$key' => (int)$model->$key,\n";
+                    else
+                        $data .= "\t\t\t'$key' => HelperUtil::nullOrInteger($model->$key),\n";
                     break;
                 case IntegerType::DATETIME:
                     $data .= "\t\t\t'$key' => $model->$key,\n";
@@ -98,7 +98,10 @@ class GenerateTransformer extends Generator
                     $data .= "\t\t\t'$key' => $model->$key,\n";
                     break;
                 case IntegerType::BOOLEAN:
-                    $data .= "\t\t\t'$key' => (bool)$model->$key,\n";
+                    if ($column->getNotnull())
+                        $data .= "\t\t\t'$key' => (bool)$model->$key,\n";
+                    else
+                        $data .= "\t\t\t'$key' => HelperUtil::nullOrBool($model->$key),\n";
                     break;
                 default:
                     $data .= "\t\t\t'$key' => $model->$key,\n";

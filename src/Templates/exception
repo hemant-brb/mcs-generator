@@ -12,15 +12,13 @@ namespace {{namespace}};
  * Class {{class}}
  * @package {{namespace}}
  */
-class {{class}} extends HttpException
+class {{class}} extends \Symfony\Component\HttpKernel\Exception\HttpException
 {
     const ERROR_MESSAGE = '{{model}} not Found';
+    const ERROR_CODE = 404;
 
-    /**
-     * JobNotFoundException constructor.
-     */
-    public function __construct()
+    public function __construct($statusCode = 422)
     {
-        parent::__construct(self::ERROR_MESSAGE, self::ERROR_NOT_FOUND, 404);
+        parent::__construct($statusCode, self::ERROR_MESSAGE, null, array(), self::ERROR_CODE);
     }
 }

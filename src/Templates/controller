@@ -12,6 +12,7 @@ use App\Transformers\{{Model}}Transformer;
 use App\Api\V1\Requests\Create{{Model}}Request;
 use App\Api\V1\Requests\Update{{Model}}Request;
 use App\Services\{{Model}}Service;
+use Devslane\Generator\Controllers\BaseController;
 
 /**
  * Class {{Model}}Controller

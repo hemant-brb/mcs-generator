@@ -16,7 +16,7 @@ class FileSystemService
     public static function createFile($fileName, $fileDir, $content, $overwrite = false) {
         if (!is_dir($fileDir)) {
             try {
-                mkdir($fileDir);
+                mkdir($fileDir, 0777, true);
             } catch (\Exception $exception) {
                 throw new \Exception("File wasn't created. Error: " . $exception->getMessage());
             }

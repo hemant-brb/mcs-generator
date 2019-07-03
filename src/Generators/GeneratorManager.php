@@ -41,12 +41,12 @@ class GeneratorManager
                 $this->generateController($table);
                 $this->generateException($table);
                 $this->generateFactory($table);
-                $this->generateIdeHelperMethods($table);
                 $this->generateModel($table, true);
                 $this->generateTransformer($table);
                 $this->generateRequest($table);
                 $this->generateSeeder($table);
                 $this->generateService($table);
+                $this->generateIdeHelperMethods($table);
             }
         }
     }
@@ -65,7 +65,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateContract($table);
@@ -81,7 +81,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateController($table);
@@ -96,7 +96,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateFactory($table);
@@ -112,7 +112,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateException($table);
@@ -127,7 +127,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
         foreach ($tables as $table) {
             $this->generateModel($table);
         }
@@ -141,7 +141,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateRequest($table);
@@ -157,7 +157,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateSeeder($table);
@@ -173,7 +173,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateService($table);
@@ -188,7 +188,7 @@ class GeneratorManager
         $this->includes = $tables;
         $this->excludes = [];
 
-        $tables = DBService::getTables();
+        $tables = DBService::getTables($tables);
 
         foreach ($tables as $table) {
             $this->generateTransformer($table);

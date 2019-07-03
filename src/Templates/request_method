@@ -1,4 +1,4 @@
-    public function {{method_type}}{{Field}}()
+    public function {{function_type}}{{Field}}()
     {
         return $this->{{method_type}}(self::{{CONST}});
     }
