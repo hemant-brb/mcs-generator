@@ -82,7 +82,7 @@ class GenerateRequest extends Generator
         if ($this->type != "List") {
             $columns = $this->table->getColumns();
             foreach ($columns as $key => $column) {
-                if ($key === 'id') {
+                if ($key === 'id'|| $key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
                     continue;
                 }
                 $const                 = Str::upper(Str::snake($key));

@@ -84,6 +84,9 @@ class GenerateTransformer extends Generator
         $data    = "";
         $model   = '$' . strtolower($this->model);
         foreach ($columns as $key => $column) {
+            if ($key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
+                continue;
+            }
             switch ($column->getType()->getName()) {
                 case IntegerType::INTEGER:
                     if ($column->getNotnull())
