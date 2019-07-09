@@ -32,7 +32,7 @@ class GenerateModel extends Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $withRelationalMethods) {
-        $this->parent         = ConfigHelper::get('model.parent');
+        $this->parent         = "BaseModel";
         $this->withRtnMethods = $withRelationalMethods;
         parent::__construct($table, 'model');
     }

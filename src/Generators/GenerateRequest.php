@@ -57,7 +57,7 @@ class GenerateRequest extends Generator
             $this->className = "$this->className$suffix";
         }
         $this->contractName = str_replace('Request', 'Contract', $this->className);
-        $contractPath       = Config::get('mcs-helper.namespace.contract');
+        $contractPath       = Config::get('mcs-helper.contract.namespace');
         $this->contractName = $contractPath . '\\' . $this->contractName;
     }
 
@@ -91,12 +91,14 @@ class GenerateRequest extends Generator
                 $requestConstTemplate  = str_replace('{{key}}', "'$key'", $requestConstTemplate);
                 $constants             .= $requestConstTemplate;
                 $requestMethodTemplate = TemplateService::getTemplate('request_method');
-                $requestMethodTemplate = str_replace('{{method_type}}', 'get', $requestMethodTemplate);
+                $requestMethodTemplate = str_replace('{{function_type}}', 'get', $requestMethodTemplate);
+                $requestMethodTemplate = str_replace('{{method_type}}', 'input', $requestMethodTemplate);
                 $requestMethodTemplate = str_replace('{{Field}}', Str::studly($key), $requestMethodTemplate);
                 $requestMethodTemplate = str_replace('{{CONST}}', $const, $requestMethodTemplate);
                 $methods               .= $requestMethodTemplate;
                 if ($this->type === 'Update') {
                     $requestMethodTemplate = str_replace('get', 'has', $requestMethodTemplate);
+                    $requestMethodTemplate = str_replace('input', 'has', $requestMethodTemplate);
                     $methods               .= $requestMethodTemplate;
                 }
             }
