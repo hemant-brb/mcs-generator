@@ -4,10 +4,14 @@
 namespace Devslane\Generator\Models;
 
 
+use App\Traits\QueryBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model {
+class BaseModel extends Model
+{
+    use QueryBuilder;
+
     protected $casts = [
         'id' => 'number'
     ];
