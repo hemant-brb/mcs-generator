@@ -53,19 +53,14 @@ php artisan vendor:publish --provider="Devslane\Generator\Providers\GeneratorSer
 
 
 ### Generate Migration
-Run this command to generate the migration file providing the table name and column details.
 
-_generate:migration {table : Name of the table} {--columns= : Columns of the table}_
+Supports to create migration with columns of provided datatype, with constraints or column with foreign key:
 
-Not providing any columns will generate the migration containing only the Primary Key as 
-_Illuminate\Database\Schema\Blueprint bigIncrements_. and the Timestamps.
-
-```php
-$table->bigIncrements('id');
-$table->timestamps();
+```
+php artisan generate:migration {table : Table name} {--columns= : Columns}
 ```
 
-``` php
+```
 php artisan generate:migration users --columns=first_name:string,last_name:string,age:integer
 ```
 
@@ -104,24 +99,25 @@ class CreateUsersTable extends Migration
 }
 ```
 
+
 Foreign Key constraint on a column can also be provided with the command as:
 
 ```bash
-php artisan create:migration test --columns=user_id:fk=users 
+php artisan create:migration posts --columns=post:string,user_id:fk=users 
 ```
-__create:migration {table : Name of the table} {--columns= : **columnName:fk=relatedTableName**}_
 
-Foreign key constraint is always applied on the Primary Id of the Related table provided.
+---
 
 ### Generate Model
 The command generates the Eloquent Models for the tables provided with the command.
 
-_generate:model {tables*}_
-
-```bash
+```
+php artisan generate:model {tables*}
+```
+```
 php artisan generate:model users
 ```
-Generates: **User**
+Generates: **User.php**
 ```php
 namespace App;
 use Devslane\Generator\Models\BaseModel;
