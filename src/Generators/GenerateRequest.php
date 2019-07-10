@@ -23,9 +23,14 @@ use Illuminate\Support\Str;
  *
  * @property-read string $contractName
  * @property-read string $parentRequest
+ * @property-read string $type
+ *
  */
 class GenerateRequest extends Generator
 {
+
+    const GENERATOR_TYPE = 'request';
+
     protected $contractName;
     protected $parentRequest;
     protected $type;
@@ -37,14 +42,10 @@ class GenerateRequest extends Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $type) {
-        $this->type = $type;
-        if ($this->type === "List") {
-            $this->parentRequest = Config::get('mcs-helper.request.list_parent');
-        } else {
-            $this->parentRequest = Config::get('mcs-helper.request.parent');
-        }
-        parent::__construct($table, 'request');
+        $this->type          = $type;
+        $this->parentRequest = Config::get('mcs-helper.request.parent');
 
+        parent::__construct($table, self::GENERATOR_TYPE);
     }
 
     public function setClassName($suffix = "Request") {
@@ -58,6 +59,13 @@ class GenerateRequest extends Generator
         $this->contractName = $contractPath . '\\' . $this->contractName;
     }
 
+    public function setTemplate() {
+        $templateName = self::GENERATOR_TYPE;
+        if ($this->type === "List") {
+            $templateName = 'list_request';
+        }
+        $this->template = TemplateService::getTemplate($templateName);
+    }
 
     public function fillTemplate() {
         $this->template = str_replace('{{user}}', $this->user, $this->template);

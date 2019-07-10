@@ -1,45 +1,19 @@
 <?php
 
 /**
- * Created by: Hemant Saini
- * Date: Thu, 06 Jun 2019 10:25:45 +0000
+ * Created by: {{user}}
+ * Date: {{date}}
  */
 
-namespace App\Api\V1\Requests;
+namespace {{namespace}};
 
-use Devslane\Generator\Requests\BaseRequest;
+use Devslane\Generator\Requests\ListRequest;
 
 /**
- * Class ListTesttableRequest
- * @package App\Api\V1\Requests
+ * Class {{class}}
+ * @package {{namespace}}
  */
-class ListRequest extends BaseRequest
+class {{class}} extends ListRequest
 {
-    const LIMIT       = 'limit';
-    const ORDER       = 'order';
-    const ORDER_BY       = 'order_by';
-    const SEARCH_QUERY       = 'search_query';
-
-
-    public function getLimit()
-    {
-        return $this->input(self::LIMIT);
-    }
-
-    public function getOrder()
-    {
-        return $this->input(self::ORDER);
-    }
-
-    public function getOrderBy()
-    {
-        return $this->input(self::ORDER_BY);
-    }
-
-    public function getSearchQuery()
-    {
-        return $this->input(self::SEARCH_QUERY);
-    }
-
-
+{{body}}
 }

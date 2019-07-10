@@ -132,7 +132,6 @@ return [
         'namespace'          => 'App\Api\V1\Requests',
         'overwrite'          => false,
         'parent'             => 'BaseRequest',
-        'list_parent'        => 'Devslane\Generator\Requests\ListRequest',
         'exclude_table'      => [
             'password_resets'
         ],
