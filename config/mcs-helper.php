@@ -12,10 +12,10 @@ return [
      |--------------------------------------------------------------------------
      | Overwrite existing files.
      |--------------------------------------------------------------------------
-     | If true, it will regenerate all existing files that matches the include and exclude pattern.
+     | If false, it will regenerate all existing files that matches the include and exclude pattern.
      |
     */
-    'overwrite'  => true,
+    'overwrite'  => false,
     /*
      |--------------------------------------------------------------------------
      | Base path of the project.
@@ -50,7 +50,7 @@ return [
     'contract'   => [
         'path'               => 'app/Services/Contract',
         'namespace'          => 'App\Services\Contract',
-        'overwrite'          => true,
+        'overwrite'          => false,
         'exclude_table'      => [
             'password_resets'
         ],
@@ -69,7 +69,7 @@ return [
     'controller' => [
         'path'          => 'app/Api/V1/Controllers',
         'namespace'     => 'App\Api\V1\Controllers',
-        'overwrite'     => true,
+        'overwrite'     => false,
         'parent'        => 'BaseController',
         'exclude_table' => [
             'password_resets', 'migrations',
@@ -95,7 +95,7 @@ return [
 
     'factory'     => [
         'path'          => 'database/factories',
-        'overwrite'     => true,
+        'overwrite'     => false,
         'exclude_table' => [
             'password_resets', 'migrations',
         ],
@@ -116,7 +116,7 @@ return [
     'model'       => [
         'path'          => 'app',
         'namespace'     => 'App',
-        'overwrite'     => true,
+        'overwrite'     => false,
         'exclude_table' => [
             'password_resets'
         ],
@@ -130,9 +130,9 @@ return [
     'request'     => [
         'path'               => 'app/Api/V1/Requests',
         'namespace'          => 'App\Api\V1\Requests',
-        'overwrite'          => true,
+        'overwrite'          => false,
         'parent'             => 'BaseRequest',
-        'list_parent'        => 'ListRequest',
+        'list_parent'        => 'Devslane\Generator\Requests\ListRequest',
         'exclude_table'      => [
             'password_resets'
         ],
@@ -151,7 +151,7 @@ return [
     'seeder'      => [
         'row_count'     => 10,
         'path'          => 'database/seeds',
-        'overwrite'     => true,
+        'overwrite'     => false,
         'exclude_table' => [
             'password_resets', 'migrations',
         ],
@@ -163,7 +163,7 @@ return [
     'service'     => [
         'path'               => 'app/Services',
         'namespace'          => 'App\Services',
-        'overwrite'          => true,
+        'overwrite'          => false,
         'exclude_table'      => [
             'password_resets'
         ],
@@ -179,7 +179,7 @@ return [
     'transformer' => [
         'path'          => 'app/Transformers',
         'namespace'     => 'App\Transformers',
-        'overwrite'     => true,
+        'overwrite'     => false,
         'exclude_table' => [
             'password_resets'
         ],

@@ -8,6 +8,7 @@
 namespace {{namespace}};
 
 use {{contract}} as Contract;
+use Devslane\Generator\Requests\BaseRequest
 
 /**
  * Class {{class}}

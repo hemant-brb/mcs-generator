@@ -38,15 +38,12 @@ class GenerateRequest extends Generator
      */
     public function __construct(Table $table, $type) {
         $this->type = $type;
-        if (!$this->type == "List") {
-            $this->parentRequest = Config::get('mcs-helper.request.parent');
-        } else {
+        if ($this->type === "List") {
             $this->parentRequest = Config::get('mcs-helper.request.list_parent');
+        } else {
+            $this->parentRequest = Config::get('mcs-helper.request.parent');
         }
         parent::__construct($table, 'request');
-        if ($this->type == "List") {
-            FileSystemService::createFile('ListRequest.php',$this->filePath,TemplateService::getTemplate('list_request'));
-        }
 
     }
 
@@ -60,7 +57,6 @@ class GenerateRequest extends Generator
         $contractPath       = Config::get('mcs-helper.contract.namespace');
         $this->contractName = $contractPath . '\\' . $this->contractName;
     }
-
 
 
     public function fillTemplate() {
@@ -79,17 +75,19 @@ class GenerateRequest extends Generator
     public function setBody() {
         $methods   = "";
         $constants = "";
+        $rules     = "";
         if ($this->type != "List") {
             $columns = $this->table->getColumns();
             foreach ($columns as $key => $column) {
                 if ($key === 'id') {
                     continue;
                 }
-                $const                 = Str::upper(Str::snake($key));
-                $requestConstTemplate  = TemplateService::getTemplate('request_const');
-                $requestConstTemplate  = str_replace('{{CONST}}', $const, $requestConstTemplate);
-                $requestConstTemplate  = str_replace('{{key}}', "'$key'", $requestConstTemplate);
-                $constants             .= $requestConstTemplate;
+                $const                = Str::upper(Str::snake($key));
+                $requestConstTemplate = TemplateService::getTemplate('request_const');
+                $requestConstTemplate = str_replace('{{CONST}}', $const, $requestConstTemplate);
+                $requestConstTemplate = str_replace('{{key}}', "'$key'", $requestConstTemplate);
+                $constants            .= $requestConstTemplate;
+
                 $requestMethodTemplate = TemplateService::getTemplate('request_method');
                 $requestMethodTemplate = str_replace('{{function_type}}', 'get', $requestMethodTemplate);
                 $requestMethodTemplate = str_replace('{{method_type}}', 'input', $requestMethodTemplate);
@@ -101,8 +99,18 @@ class GenerateRequest extends Generator
                     $requestMethodTemplate = str_replace('input', 'has', $requestMethodTemplate);
                     $methods               .= $requestMethodTemplate;
                 }
+
+                if (!empty($rules)) {
+                    $rules .= ",\n\t\t\t";
+                }
+                $rules .= 'self::' . $const . ' => ' . "'nullable'";
             }
-            $this->body = "$constants\n\n$methods";
+
+            $requestRulesTemplate = TemplateService::getTemplate('request_rules');
+            $rules                = str_replace('{{RULES}}', $rules, $requestRulesTemplate);
+            $this->body           = "$constants\n\n$rules\n\n$methods";
+
+
         } else {
             $this->body = "";
         }
