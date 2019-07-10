@@ -1,7 +1,42 @@
 
-##### Generate code using following commands.
+### Installation
 
-* [`php artisan generate:all`](#generate-all)
+To install this package you will need:
+- PHP 7.2 +
+- Laravel 5.8 +
+
+Run the following from the terminal to install the package:
+```bash
+composer require devslane/generator
+```
+---
+*Install via composer* - edit your `composer.json` to require the package.
+
+```
+"require": {
+    "devslane/generator": "dev-master"
+}
+```
+
+Then run composer update in your terminal to pull it in.
+
+---
+
+### Configuration:
+
+- Add the service provider to the providers array in your app.php config as follows:
+```
+Devslane\Generator\Providers\GeneratorServiceProvider::class,
+```
+- Publish the configuration file with the following Artisan command:
+```
+php artisan vendor:publish --provider="Devslane\Generator\Providers\GeneratorServiceProvider"
+```
+
+---
+
+#### Helper commands.
+
 * [`php artisan generate:migration`](#generate-migration)
 * [`php artisan generate:model`](#generate-model)
 * [`php artisan generate:contract`](#generate-contract)
@@ -12,28 +47,10 @@
 * [`php artisan generate:controller`](#generate-controller)
 * [`php artisan generate:factory`](#generate-factory)
 * [`php artisan generate:seeder`](#generate-seeder)
+* [`php artisan generate:all`](#generate-all)
 
-### Installation
-Require this package with composer using the following command:
+---
 
-```bash
-composer require devslane/generator
-```
-
-### Publish
-Publish the GeneratorServiceProvider.
-
-```bash
-php artisan vendor:publish --provider="Devslane\Generator\Providers\GeneratorServiceProvider"
-```
-
-### Generate All
-
-_generate:all {tables*}_
-
-```bash
-php artisan generate:all users
-```
 
 ### Generate Migration
 Run this command to generate the migration file providing the table name and column details.
@@ -689,4 +706,12 @@ class UsersTableSeeder extends Seeder
         factory(User::class, $size)->create();
     }
 }
+```
+
+### Generate All
+
+_generate:all {tables*}_
+
+```bash
+php artisan generate:all users
 ```
