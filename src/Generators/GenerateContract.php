@@ -58,7 +58,7 @@ class GenerateContract extends Generator
         $data    = "";
         if ($this->type != "List") {
             foreach ($columns as $key => $column) {
-                if ($key === 'id') {
+                if ($key === 'id'|| $key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
                     continue;
                 }
                 $fieldName = Str::studly($key);
