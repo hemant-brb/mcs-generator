@@ -55,7 +55,7 @@ return [
             'password_resets'
         ],
         'types'              => [
-            'Create', 'Update', 'List'
+            'Create', 'Update'
         ],
         'include'            => [],
         'exclude'            => [],
