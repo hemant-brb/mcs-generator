@@ -208,8 +208,7 @@ return [
         'exclude_table' => [
             'password_resets'
         ],
-        'include'       => [],
-        'exclude'       => ['password', 'deleted_at', 'user_id'],
+        'exclude_columns'       => ['password', 'deleted_at', 'user_id'],
     ]
 
 ];

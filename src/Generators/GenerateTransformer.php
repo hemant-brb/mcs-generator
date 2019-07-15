@@ -11,6 +11,7 @@ namespace Devslane\Generator\Generators;
 
 use Carbon\Carbon;
 use Devslane\Generator\Services\FileSystemService;
+use Devslane\Generator\Utils\ConfigHelper;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\IntegerType;
 
@@ -18,15 +19,20 @@ use Doctrine\DBAL\Types\IntegerType;
 /**
  * Class GenerateTransformer
  * @package Devslane\Generator\Generators
+ *
+ * @property-read $skippedColumns
  */
 class GenerateTransformer extends Generator
 {
+    protected $skippedColumns = [];
+
     /**
      * GenerateTransformer constructor.
      * @param Table $table
      * @throws \Exception
      */
     public function __construct(Table $table) {
+        $this->skippedColumns = ConfigHelper::get('transformer.exclude_columns');
         parent::__construct($table, 'transformer');
     }
 
@@ -35,9 +41,7 @@ class GenerateTransformer extends Generator
      * @throws \Exception
      */
     public function create() {
-        $this->setBody();
-        $template = $this->fillTemplate();
-        FileSystemService::createFile($this->className . '.php', $this->filePath, $template);
+        FileSystemService::createFile($this->className . '.php', $this->filePath, $this->template);
     }
 
     public function setClassName($prefix = null, $suffix = "Transformer") {
@@ -52,8 +56,7 @@ class GenerateTransformer extends Generator
 
 
     /**
-     * @param $template
-     * @return mixed
+     * @return string
      */
     public function fillTemplate() {
         $this->template = str_replace('{{user}}', $this->user, $this->template);
@@ -72,7 +75,7 @@ class GenerateTransformer extends Generator
         $data    = "";
         $model   = '$' . strtolower($this->model);
         foreach ($columns as $key => $column) {
-            if ($key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
+            if (in_array($key, $this->skippedColumns)) {
                 continue;
             }
             switch ($column->getType()->getName()) {
@@ -83,16 +86,20 @@ class GenerateTransformer extends Generator
                         $data .= "\t\t\t'$key' => HelperUtil::nullOrInteger($model->$key),\n";
                     break;
                 case IntegerType::DATETIME:
-                    $data .= "\t\t\t'$key' => $model->$key,\n";
+                    $data .= "\t\t\t'$key' => HelperUtil::nullOrDateTimeString($model->$key),\n";
+                    break;
+                case IntegerType::DATE:
+                    $data .= "\t\t\t'$key' => HelperUtil::nullOrDateString($model->$key),\n";
                     break;
                 case IntegerType::STRING:
                     $data .= "\t\t\t'$key' => $model->$key,\n";
                     break;
                 case IntegerType::BOOLEAN:
-                    if ($column->getNotnull())
+                    if ($column->getNotnull()) {
                         $data .= "\t\t\t'$key' => (bool)$model->$key,\n";
-                    else
+                    } else {
                         $data .= "\t\t\t'$key' => HelperUtil::nullOrBool($model->$key),\n";
+                    }
                     break;
                 default:
                     $data .= "\t\t\t'$key' => $model->$key,\n";
