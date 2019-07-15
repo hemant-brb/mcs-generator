@@ -17,6 +17,14 @@ class ConfigHelper
     const CONFIG_FILE = 'mcs-helper';
 
     /**
+     * @return bool
+     */
+    public static function isPublished() {
+        return file_exists(base_path('config/mcs-helper.php'));
+    }
+
+
+    /**
      * @param $key
      * @return mixed
      */
@@ -53,21 +61,21 @@ class ConfigHelper
      * @return mixed
      */
     public static function service($string) {
-        return Config::get(self::CONFIG_FILE .'.service.' . $string);
+        return Config::get(self::CONFIG_FILE . '.service.' . $string);
     }
 
     /**
      * @return mixed
      */
     public static function username() {
-        return Config::get(self::CONFIG_FILE .'.username');
+        return Config::get(self::CONFIG_FILE . '.username');
     }
 
     /**
      * @return mixed
      */
     public static function getBasePath() {
-        return Config::get(self::CONFIG_FILE .'.base_path');
+        return Config::get(self::CONFIG_FILE . '.base_path');
     }
 
     /**

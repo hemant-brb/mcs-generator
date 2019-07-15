@@ -50,6 +50,10 @@ abstract class Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $generatorType) {
+        if(!ConfigHelper::isPublished()){
+            throw new \Exception("The package is not published");
+        }
+
         $this->table         = $table;
         $this->generatortype = $generatorType;
 
@@ -61,7 +65,6 @@ abstract class Generator
         $this->setTemplate();
         $this->setBody();
         $this->fillTemplate();
-        $this->create();
     }
 
     /**

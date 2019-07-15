@@ -65,7 +65,7 @@ class GenerateModel extends Generator
     /**
      * @param string $properties
      */
-    public function setProperties($properties): void {
+    public function setProperties($properties) {
         $this->properties = $properties;
     }
 
@@ -74,11 +74,10 @@ class GenerateModel extends Generator
      * @throws \Exception
      */
     public function create() {
-        $content = $this->fillTemplate();
         if ($this->withRtnMethods) {
-            $content = $this->addRelationalMethods($content);
+            $this->template = $this->addRelationalMethods($this->template);
         }
-        FileSystemService::createFile($this->getClassName() . '.php', $this->filePath, $content);
+        FileSystemService::createFile($this->getClassName() . '.php', $this->filePath, $this->template);
     }
 
     /**

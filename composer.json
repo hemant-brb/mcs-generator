@@ -14,11 +14,12 @@
         "illuminate/filesystem": "^5.8",
         "illuminate/database": "^5.8",
         "illuminate/console": "^5.8",
-        "dingo/api": "^2.1.0",
+        "dingo/api": "^2",
         "devslane/helper": "master-dev",
         "doctrine/dbal": "^2.9",
         "illuminate/support": "^5.8",
-        "laravel/framework": "5.8.*"
+        "laravel/framework": "5.8.*",
+        "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {
 

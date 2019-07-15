@@ -148,8 +148,6 @@ return [
         'path'               => 'app/Api/V1/Requests',
         'namespace'          => 'App\Api\V1\Requests',
         'overwrite'          => true,
-        'parent'             => 'Request',
-        'list_parent'        => 'ListRequest',
         'exclude_table'      => [
             'password_resets'
         ],

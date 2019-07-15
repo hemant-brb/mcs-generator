@@ -41,8 +41,6 @@ class GenerateRequest extends Generator
      */
     public function __construct(Table $table, $type) {
         $this->type          = $type;
-        $this->parentRequest = Config::get('mcs-helper.request.parent');
-
         parent::__construct($table, self::GENERATOR_TYPE);
     }
 
@@ -72,7 +70,6 @@ class GenerateRequest extends Generator
         $this->template = str_replace('{{contract}}', $this->contractName, $this->template);
         $this->template = str_replace('{{class}}', $this->className, $this->template);
         $this->template = str_replace('{{body}}', $this->body, $this->template);
-        $this->template = str_replace('{{ParentRequest}}', $this->parentRequest, $this->template);
     }
 
     /**
