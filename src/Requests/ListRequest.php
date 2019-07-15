@@ -11,6 +11,10 @@ namespace Devslane\Generator\Requests;
 
 use Devslane\Generator\Services\Contracts\ListContract;
 
+/**
+ * Class ListRequest
+ * @package Devslane\Generator\Requests
+ */
 class ListRequest extends BaseRequest implements ListContract
 {
     const LIMIT        = 'limit';

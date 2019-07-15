@@ -13,6 +13,10 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class DBService
+ * @package Devslane\Generator\Services
+ */
 class DBService
 {
     /**

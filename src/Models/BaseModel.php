@@ -8,6 +8,10 @@ use App\Traits\QueryBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class BaseModel
+ * @package Devslane\Generator\Models
+ */
 class BaseModel extends Model
 {
     use QueryBuilder;

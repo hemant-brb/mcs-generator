@@ -18,20 +18,7 @@ use Illuminate\Support\Str;
 
 /**
  * Class GenerateController
- * @package App\TEST
- *
- * @property-read Table $table
- * @property-read string $className
- * @property-read string $namespace
- * @property-read string $body
- * @property-read string $parent
- * @property-read string $properties
- * @property-read string $template
- * @property-read string $user
- * @property-read string $filePath
- * @property-read string $types
- * @property-read string $model
- * @property-read string $parentController
+ * @package Devslane\Generator\Generators
  */
 class GenerateController extends Generator
 {

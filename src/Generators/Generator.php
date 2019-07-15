@@ -14,11 +14,9 @@ use Devslane\Generator\Templates\TemplateService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Str;
 
-
 /**
- * Class GenerateService
- * @package App\TEST
- *
+ * Class Generator
+ * @package Devslane\Generator\Generators
  * @property-read Table $table
  * @property-read string $className
  * @property-read string $namespace

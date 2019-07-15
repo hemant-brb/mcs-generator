@@ -15,6 +15,10 @@ use Devslane\Generator\Console\Commands\GenerateSetupCommand;
 use Devslane\Generator\Console\Commands\GenerateTransformerCommand;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class GeneratorServiceProvider
+ * @package Devslane\Generator\Providers
+ */
 class GeneratorServiceProvider extends ServiceProvider
 {
     /**

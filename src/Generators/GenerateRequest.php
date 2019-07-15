@@ -10,7 +10,6 @@ namespace Devslane\Generator\Generators;
 
 
 use Carbon\Carbon;
-use Devslane\Generator\Services\FileSystemService;
 use Devslane\Generator\Templates\TemplateService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Facades\Config;
@@ -19,12 +18,11 @@ use Illuminate\Support\Str;
 
 /**
  * Class GenerateRequest
- * @package App\TEST
+ * @package Devslane\Generator\Generators
  *
  * @property-read string $contractName
  * @property-read string $parentRequest
  * @property-read string $type
- *
  */
 class GenerateRequest extends Generator
 {

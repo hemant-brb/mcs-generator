@@ -12,6 +12,10 @@ namespace Devslane\Generator\Generators;
 use Devslane\Generator\Utils\Helpers;
 use Doctrine\DBAL\Schema\Table;
 
+/**
+ * Class GenerateSeeder
+ * @package Devslane\Generator\Generators
+ */
 class GenerateSeeder extends Generator
 {
     const GENERATOR_TYPE = 'seeder';

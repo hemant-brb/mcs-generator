@@ -9,6 +9,9 @@ Run the following from the terminal to install the package:
 ```bash
 composer require devslane/generator
 ```
+```
+composer require devslane/generator --dev
+```
 ---
 *Install via composer* - edit your `composer.json` to require the package.
 

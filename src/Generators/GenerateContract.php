@@ -14,12 +14,15 @@ use Illuminate\Support\Str;
 
 /**
  * Class GenerateContract
- * @package App\TEST
+ * @package Devslane\Generator\Generators
  *
+ * @property-read $type
+ * @property-read $excludedKeys
  */
 class GenerateContract extends Generator
 {
     protected $type;
+    protected $excludedKeys = ['id', 'created_at', 'deleted_at', 'updated_at'];
 
     /**
      * GenerateContract constructor.
@@ -58,7 +61,7 @@ class GenerateContract extends Generator
         $data    = "";
         if ($this->type != "List") {
             foreach ($columns as $key => $column) {
-                if ($key === 'id'|| $key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
+                if (!in_array($key, $this->excludedKeys)) {
                     continue;
                 }
                 $fieldName = Str::studly($key);

@@ -18,11 +18,9 @@ use Illuminate\Support\Str;
  * Class GenerateHelperDocs
  * @package Devslane\Generator\Services
  *
- *
  * @property-read Table $table
  * @property-read string $file
  * @property-read string $fileContent
- *
  */
 class GenerateHelperDocs
 {

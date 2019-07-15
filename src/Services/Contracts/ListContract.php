@@ -8,7 +8,10 @@
 
 namespace Devslane\Generator\Services\Contracts;
 
-
+/**
+ * Interface ListContract
+ * @package Devslane\Generator\Services\Contracts
+ */
 interface ListContract
 {
     public function getLimit();
