@@ -20,7 +20,7 @@ use Devslane\Generator\Controllers\BaseController;
  *
  * @property-read {{Model}}Service ${{var_service}}
  */
-class {{Model}}Controller extends {{ParentController}}
+class {{Model}}Controller extends BaseController
 {
     protected ${{var_service}};
 

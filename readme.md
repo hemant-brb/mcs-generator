@@ -103,6 +103,13 @@ class CreateUsersTable extends Migration
 ```
 
 
+Add unique and nullable constraints:
+
+```
+php artisan generate:migration table1 --columns=name:string/nullable
+php artisan generate:migration table2 --columns=name:string/unique
+```
+
 Foreign Key constraint on a column can also be provided with the command as:
 
 ```bash
@@ -554,7 +561,7 @@ Generated transformers are used by the controller before sending the response.
 _generate:controller {tables*}_
 
 ```bash
-php artisan generate:controller users
+php artisan generate:controller users videos posts
 ```
 Generates: **User**Controller
 
@@ -640,7 +647,7 @@ Generates the Factory for the tables provided.
 _generate:factory {tables*}_
 
 ```bash
-php artisan generate:facotory users
+php artisan generate:facotory users posts videos
 ```
 Generates: **User**Factory
 
@@ -683,7 +690,7 @@ return [
 _generate:seeder {tables*}_
 
 ```bash
-php artisan generate:seeder users
+php artisan generate:seeder users videos posts
 ```
 Generates: **User**Seeder
 
@@ -712,5 +719,5 @@ class UsersTableSeeder extends Seeder
 _generate:all {tables*}_
 
 ```bash
-php artisan generate:all users
+php artisan generate:all users videos posts
 ```

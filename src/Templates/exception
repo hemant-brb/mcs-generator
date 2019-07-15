@@ -7,18 +7,20 @@
 
 namespace {{namespace}};
 
+use Devslane\Generator\Exceptions\HttpException;
+
 
 /**
  * Class {{class}}
  * @package {{namespace}}
  */
-class {{class}} extends \Symfony\Component\HttpKernel\Exception\HttpException
+class {{class}} extends HttpException
 {
     const ERROR_MESSAGE = '{{model}} not Found';
     const ERROR_CODE = 404;
 
     public function __construct($statusCode = 422)
     {
-        parent::__construct($statusCode, self::ERROR_MESSAGE, null, array(), self::ERROR_CODE);
+        parent::__construct($statusCode, self::ERROR_MESSAGE);
     }
 }

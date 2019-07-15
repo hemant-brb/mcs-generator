@@ -52,19 +52,18 @@ return [
      |--------------------------------------------------------------------------
      */
     'contract'    => [
-        'path'               => 'app/Services/Contract',
-        'namespace'          => 'App\Services\Contract',
-        'overwrite'          => true,
-        'exclude_table'      => [
+        'path'            => 'app/Services/Contract',
+        'namespace'       => 'App\Services\Contract',
+        'overwrite'       => true,
+        'exclude_table'   => [
             'password_resets'
         ],
-        'types'              => [
+        'types'           => [
             'Create', 'Update', 'List'
         ],
-        'include'            => [],
-        'exclude'            => [],
-        'skip_create_fields' => ['id', 'deleted_at', 'created_at', 'updated_at'],
-        'skip_update_fields' => ['id', 'deleted_at', 'created_at', 'updated_at']
+        'include'         => [],
+        'exclude'         => [],
+        'exclude_columns' => ['id', 'deleted_at', 'created_at', 'updated_at'],
     ],
 
     /*
@@ -76,7 +75,6 @@ return [
         'path'          => 'app/Api/V1/Controllers',
         'namespace'     => 'App\Api\V1\Controllers',
         'overwrite'     => true,
-        'parent'        => 'Controller',
         'exclude_table' => [
             'password_resets', 'migrations',
         ],
@@ -202,13 +200,13 @@ return [
      |--------------------------------------------------------------------------
      */
     'transformer' => [
-        'path'          => 'app/Transformers',
-        'namespace'     => 'App\Transformers',
-        'overwrite'     => true,
-        'exclude_table' => [
+        'path'            => 'app/Transformers',
+        'namespace'       => 'App\Transformers',
+        'overwrite'       => true,
+        'exclude_table'   => [
             'password_resets'
         ],
-        'exclude_columns'       => ['password', 'deleted_at', 'user_id'],
+        'exclude_columns' => ['password', 'deleted_at', 'user_id'],
     ]
 
 ];

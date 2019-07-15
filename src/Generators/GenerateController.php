@@ -22,7 +22,6 @@ use Illuminate\Support\Str;
  */
 class GenerateController extends Generator
 {
-    protected $parentController;
 
     /**
      * GenerateController constructor.
@@ -30,17 +29,7 @@ class GenerateController extends Generator
      * @throws \Exception
      */
     public function __construct(Table $table) {
-        if (empty(Config::get('mcs-helper.controller.parent'))) {
-            throw new \Exception("Controller Parent not defined");
-        }
-        $this->parentController = Config::get('mcs-helper.controller.parent');
         parent::__construct($table, 'controller');
-    }
-
-
-    public function create() {
-        $this->fillTemplate();
-        FileSystemService::createFile($this->className . '.php', $this->filePath, $this->template);
     }
 
     public function setClassName($prefix = null, $suffix = "Controller") {
@@ -64,7 +53,6 @@ class GenerateController extends Generator
         $this->template = str_replace('{{Model}}', $this->model, $this->template);
         $this->template = str_replace('{{_model}}', strtolower($this->model), $this->template);
         $this->template = str_replace('{{var_service}}', $this->getServiceVariableName(), $this->template);
-        $this->template = str_replace('{{ParentController}}', $this->parentController, $this->template);
     }
 
     private function getServiceVariableName() {
