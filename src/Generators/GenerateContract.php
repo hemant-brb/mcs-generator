@@ -9,17 +9,21 @@
 namespace Devslane\Generator\Generators;
 
 use Carbon\Carbon;
+use Devslane\Generator\Utils\ConfigHelper;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Str;
 
 /**
  * Class GenerateContract
- * @package App\TEST
+ * @package Devslane\Generator\Generators
  *
+ * @property-read $type
+ * @property-read $skippedColumns
  */
 class GenerateContract extends Generator
 {
     protected $type;
+    protected $skippedColumns = [];
 
     /**
      * GenerateContract constructor.
@@ -28,7 +32,8 @@ class GenerateContract extends Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $type) {
-        $this->type = $type;
+        $this->type           = $type;
+        $this->skippedColumns = ConfigHelper::get('contract.exclude_columns');
         parent::__construct($table, 'contract');
     }
 
@@ -58,7 +63,7 @@ class GenerateContract extends Generator
         $data    = "";
         if ($this->type != "List") {
             foreach ($columns as $key => $column) {
-                if ($key === 'id'|| $key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
+                if (in_array($key, $this->skippedColumns)) {
                     continue;
                 }
                 $fieldName = Str::studly($key);

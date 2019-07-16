@@ -10,14 +10,13 @@ namespace Devslane\Generator\Generators;
 
 
 use Carbon\Carbon;
-use Devslane\Generator\Utils\ConfigHelper;
 use Devslane\Generator\Services\FileSystemService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Str;
 
 /**
  * Class GenerateModel
- * @package App\TEST
+ * @package Devslane\Generator\Generators
  *
  * @property-read boolean $withRtnMethods
  */
@@ -66,7 +65,7 @@ class GenerateModel extends Generator
     /**
      * @param string $properties
      */
-    public function setProperties($properties): void {
+    public function setProperties($properties) {
         $this->properties = $properties;
     }
 
@@ -75,11 +74,10 @@ class GenerateModel extends Generator
      * @throws \Exception
      */
     public function create() {
-        $content = $this->fillTemplate();
         if ($this->withRtnMethods) {
-            $content = $this->addRelationalMethods($content);
+            $this->template = $this->addRelationalMethods($this->template);
         }
-        FileSystemService::createFile($this->getClassName() . '.php', $this->filePath, $content);
+        FileSystemService::createFile($this->getClassName() . '.php', $this->filePath, $this->template);
     }
 
     /**

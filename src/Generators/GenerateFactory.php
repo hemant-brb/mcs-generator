@@ -12,6 +12,10 @@ namespace Devslane\Generator\Generators;
 use Devslane\Generator\Utils\Helpers;
 use Doctrine\DBAL\Schema\Table;
 
+/**
+ * Class GenerateFactory
+ * @package Devslane\Generator\Generators
+ */
 class GenerateFactory extends Generator
 {
 

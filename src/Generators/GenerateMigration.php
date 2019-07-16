@@ -16,6 +16,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 
+/**
+ * Class GenerateMigration
+ * @package Devslane\Generator\Generators
+ */
 class GenerateMigration
 {
     const DATA_TYPES = [

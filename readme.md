@@ -1,7 +1,45 @@
 
-##### Generate code using following commands.
+### Installation
 
-* [`php artisan generate:all`](#generate-all)
+To install this package you will need:
+- PHP 7.2 +
+- Laravel 5.8 +
+
+Run the following from the terminal to install the package:
+```bash
+composer require devslane/generator
+```
+```
+composer require devslane/generator --dev
+```
+---
+*Install via composer* - edit your `composer.json` to require the package.
+
+```
+"require": {
+    "devslane/generator": "dev-master"
+}
+```
+
+Then run composer update in your terminal to pull it in.
+
+---
+
+### Configuration:
+
+- Add the service provider to the providers array in your app.php config as follows:
+```
+Devslane\Generator\Providers\GeneratorServiceProvider::class,
+```
+- Publish the configuration file with the following Artisan command:
+```
+php artisan vendor:publish --provider="Devslane\Generator\Providers\GeneratorServiceProvider"
+```
+
+---
+
+#### Helper commands.
+
 * [`php artisan generate:migration`](#generate-migration)
 * [`php artisan generate:model`](#generate-model)
 * [`php artisan generate:contract`](#generate-contract)
@@ -12,43 +50,20 @@
 * [`php artisan generate:controller`](#generate-controller)
 * [`php artisan generate:factory`](#generate-factory)
 * [`php artisan generate:seeder`](#generate-seeder)
+* [`php artisan generate:all`](#generate-all)
 
-### Installation
-Require this package with composer using the following command:
+---
 
-```bash
-composer require devslane/generator
-```
-
-### Publish
-Publish the GeneratorServiceProvider.
-
-```bash
-php artisan vendor:publish --provider="Devslane\Generator\Providers\GeneratorServiceProvider"
-```
-
-### Generate All
-
-_generate:all {tables*}_
-
-```bash
-php artisan generate:all users
-```
 
 ### Generate Migration
-Run this command to generate the migration file providing the table name and column details.
 
-_generate:migration {table : Name of the table} {--columns= : Columns of the table}_
+Supports to create migration with columns of provided datatype, with constraints or column with foreign key:
 
-Not providing any columns will generate the migration containing only the Primary Key as 
-_Illuminate\Database\Schema\Blueprint bigIncrements_. and the Timestamps.
-
-```php
-$table->bigIncrements('id');
-$table->timestamps();
+```
+php artisan generate:migration {table : Table name} {--columns= : Columns}
 ```
 
-``` php
+```
 php artisan generate:migration users --columns=first_name:string,last_name:string,age:integer
 ```
 
@@ -87,24 +102,32 @@ class CreateUsersTable extends Migration
 }
 ```
 
+
+Add unique and nullable constraints:
+
+```
+php artisan generate:migration table1 --columns=name:string/nullable
+php artisan generate:migration table2 --columns=name:string/unique
+```
+
 Foreign Key constraint on a column can also be provided with the command as:
 
 ```bash
-php artisan create:migration test --columns=user_id:fk=users 
+php artisan create:migration posts --columns=post:string,user_id:fk=users 
 ```
-__create:migration {table : Name of the table} {--columns= : **columnName:fk=relatedTableName**}_
 
-Foreign key constraint is always applied on the Primary Id of the Related table provided.
+---
 
 ### Generate Model
 The command generates the Eloquent Models for the tables provided with the command.
 
-_generate:model {tables*}_
-
-```bash
+```
+php artisan generate:model {tables*}
+```
+```
 php artisan generate:model users
 ```
-Generates: **User**
+Generates: **User.php**
 ```php
 namespace App;
 use Devslane\Generator\Models\BaseModel;
@@ -538,7 +561,7 @@ Generated transformers are used by the controller before sending the response.
 _generate:controller {tables*}_
 
 ```bash
-php artisan generate:controller users
+php artisan generate:controller users videos posts
 ```
 Generates: **User**Controller
 
@@ -624,7 +647,7 @@ Generates the Factory for the tables provided.
 _generate:factory {tables*}_
 
 ```bash
-php artisan generate:facotory users
+php artisan generate:facotory users posts videos
 ```
 Generates: **User**Factory
 
@@ -667,7 +690,7 @@ return [
 _generate:seeder {tables*}_
 
 ```bash
-php artisan generate:seeder users
+php artisan generate:seeder users videos posts
 ```
 Generates: **User**Seeder
 
@@ -689,4 +712,12 @@ class UsersTableSeeder extends Seeder
         factory(User::class, $size)->create();
     }
 }
+```
+
+### Generate All
+
+_generate:all {tables*}_
+
+```bash
+php artisan generate:all users videos posts
 ```

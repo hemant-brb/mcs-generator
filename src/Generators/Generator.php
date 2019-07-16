@@ -14,11 +14,9 @@ use Devslane\Generator\Templates\TemplateService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Str;
 
-
 /**
- * Class GenerateService
- * @package App\TEST
- *
+ * Class Generator
+ * @package Devslane\Generator\Generators
  * @property-read Table $table
  * @property-read string $className
  * @property-read string $namespace
@@ -52,6 +50,10 @@ abstract class Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $generatorType) {
+        if(!ConfigHelper::isPublished()){
+            throw new \Exception("The package is not published");
+        }
+
         $this->table         = $table;
         $this->generatortype = $generatorType;
 
@@ -63,7 +65,6 @@ abstract class Generator
         $this->setTemplate();
         $this->setBody();
         $this->fillTemplate();
-        $this->create();
     }
 
     /**

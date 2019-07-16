@@ -10,7 +10,6 @@ namespace Devslane\Generator\Generators;
 
 
 use Carbon\Carbon;
-use Devslane\Generator\Services\FileSystemService;
 use Devslane\Generator\Templates\TemplateService;
 use Doctrine\DBAL\Schema\Table;
 use Illuminate\Support\Facades\Config;
@@ -19,13 +18,17 @@ use Illuminate\Support\Str;
 
 /**
  * Class GenerateRequest
- * @package App\TEST
+ * @package Devslane\Generator\Generators
  *
  * @property-read string $contractName
  * @property-read string $parentRequest
+ * @property-read string $type
  */
 class GenerateRequest extends Generator
 {
+
+    const GENERATOR_TYPE = 'request';
+
     protected $contractName;
     protected $parentRequest;
     protected $type;
@@ -37,17 +40,8 @@ class GenerateRequest extends Generator
      * @throws \Exception
      */
     public function __construct(Table $table, $type) {
-        $this->type = $type;
-        if (!$this->type == "List") {
-            $this->parentRequest = Config::get('mcs-helper.request.parent');
-        } else {
-            $this->parentRequest = Config::get('mcs-helper.request.list_parent');
-        }
-        parent::__construct($table, 'request');
-        if ($this->type == "List") {
-            FileSystemService::createFile('ListRequest.php',$this->filePath,TemplateService::getTemplate('list_request'));
-        }
-
+        $this->type          = $type;
+        parent::__construct($table, self::GENERATOR_TYPE);
     }
 
     public function setClassName($suffix = "Request") {
@@ -61,7 +55,13 @@ class GenerateRequest extends Generator
         $this->contractName = $contractPath . '\\' . $this->contractName;
     }
 
-
+    public function setTemplate() {
+        $templateName = self::GENERATOR_TYPE;
+        if ($this->type === "List") {
+            $templateName = 'list_request';
+        }
+        $this->template = TemplateService::getTemplate($templateName);
+    }
 
     public function fillTemplate() {
         $this->template = str_replace('{{user}}', $this->user, $this->template);
@@ -70,7 +70,6 @@ class GenerateRequest extends Generator
         $this->template = str_replace('{{contract}}', $this->contractName, $this->template);
         $this->template = str_replace('{{class}}', $this->className, $this->template);
         $this->template = str_replace('{{body}}', $this->body, $this->template);
-        $this->template = str_replace('{{ParentRequest}}', $this->parentRequest, $this->template);
     }
 
     /**
@@ -79,17 +78,19 @@ class GenerateRequest extends Generator
     public function setBody() {
         $methods   = "";
         $constants = "";
+        $rules     = "";
         if ($this->type != "List") {
             $columns = $this->table->getColumns();
             foreach ($columns as $key => $column) {
                 if ($key === 'id'|| $key === "created_at" || $key === "deleted_at" || $key === "updated_at") {
                     continue;
                 }
-                $const                 = Str::upper(Str::snake($key));
-                $requestConstTemplate  = TemplateService::getTemplate('request_const');
-                $requestConstTemplate  = str_replace('{{CONST}}', $const, $requestConstTemplate);
-                $requestConstTemplate  = str_replace('{{key}}', "'$key'", $requestConstTemplate);
-                $constants             .= $requestConstTemplate;
+                $const                = Str::upper(Str::snake($key));
+                $requestConstTemplate = TemplateService::getTemplate('request_const');
+                $requestConstTemplate = str_replace('{{CONST}}', $const, $requestConstTemplate);
+                $requestConstTemplate = str_replace('{{key}}', "'$key'", $requestConstTemplate);
+                $constants            .= $requestConstTemplate;
+
                 $requestMethodTemplate = TemplateService::getTemplate('request_method');
                 $requestMethodTemplate = str_replace('{{function_type}}', 'get', $requestMethodTemplate);
                 $requestMethodTemplate = str_replace('{{method_type}}', 'input', $requestMethodTemplate);
@@ -101,8 +102,18 @@ class GenerateRequest extends Generator
                     $requestMethodTemplate = str_replace('input', 'has', $requestMethodTemplate);
                     $methods               .= $requestMethodTemplate;
                 }
+
+                if (!empty($rules)) {
+                    $rules .= ",\n\t\t\t";
+                }
+                $rules .= 'self::' . $const . ' => ' . "'nullable'";
             }
-            $this->body = "$constants\n\n$methods";
+
+            $requestRulesTemplate = TemplateService::getTemplate('request_rules');
+            $rules                = str_replace('{{RULES}}', $rules, $requestRulesTemplate);
+            $this->body           = "$constants\n\n$rules\n\n$methods";
+
+
         } else {
             $this->body = "";
         }

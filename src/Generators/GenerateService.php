@@ -19,24 +19,14 @@ use Illuminate\Support\Str;
 
 /**
  * Class GenerateService
- * @package App\TEST
- *
- * @property-read Table $table
- * @property-read string $className
- * @property-read string $namespace
- * @property-read string $parent
- * @property-read string $properties
- * @property-read string $template
- * @property-read string $user
- * @property-read string $filePath
- * @property-read string $types
- * @property-read string $model
+ * @package Devslane\Generator\Generators
  */
 class GenerateService extends Generator
 {
     /**
-     * GenerateRequest constructor.
+     * GenerateService constructor.
      * @param Table $table
+     * @throws \Exception
      */
     public function __construct(Table $table) {
         parent::__construct($table, 'service');

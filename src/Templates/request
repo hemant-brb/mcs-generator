@@ -8,12 +8,13 @@
 namespace {{namespace}};
 
 use {{contract}} as Contract;
+use Devslane\Generator\Requests\BaseRequest;
 
 /**
  * Class {{class}}
  * @package {{namespace}}
  */
-class {{class}} extends {{ParentRequest}} implements Contract
+class {{class}} extends BaseRequest implements Contract
 {
 {{body}}
 }
