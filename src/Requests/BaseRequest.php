@@ -3,9 +3,10 @@
 
 namespace Devslane\Generator\Requests;
 
-use Dingo\Api\Http\Request;
+use Dingo\Api\Http\FormRequest;
 
-class BaseRequest extends Request {
+class BaseRequest extends FormRequest
+{
     public function authorize() {
         return true;
     }
