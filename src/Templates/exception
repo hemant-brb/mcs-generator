@@ -21,6 +21,6 @@ class {{class}} extends HttpException
 
     public function __construct($statusCode = 422)
     {
-        parent::__construct($statusCode, self::ERROR_MESSAGE);
+        parent::__construct(self::ERROR_MESSAGE, $statusCode);
     }
 }
