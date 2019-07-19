@@ -4,8 +4,8 @@
 namespace Devslane\Generator\Models;
 
 
-use App\Traits\QueryBuilder;
 use Carbon\Carbon;
+use Devslane\Generator\Traits\QueryBuilder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
