@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Devslane\Generator\Traits;
 
 trait QueryBuilder
 {
