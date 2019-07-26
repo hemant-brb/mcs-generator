@@ -1,3 +1,8 @@
+### Introduction
+
+This package focuses on reusability of code and provides support to laravel framework. 
+The package has been developed with the aim to save developement time by providing developers very useful commands and helping in project structure setup.
+
 
 ### Installation
 
