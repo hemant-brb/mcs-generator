@@ -42,7 +42,6 @@ class GeneratorManager
                 $this->generateException($table);
                 $this->generateFactory($table);
                 $this->generateModel($table, true);
-                $this->generateTransformer($table);
                 $this->generateRequest($table);
                 $this->generateSeeder($table);
                 $this->generateService($table);
@@ -180,22 +179,6 @@ class GeneratorManager
         }
     }
 
-    /**
-     * @param array $tables
-     * @throws \Exception
-     */
-    public function generatorTransformers($tables = array()) {
-        $this->includes = $tables;
-        $this->excludes = [];
-
-        $tables = DBService::getTables($tables);
-
-        foreach ($tables as $table) {
-            $this->generateTransformer($table);
-        }
-    }
-
-
 
     /*                                                                                          *//*
      * ---------------------------------------------------------------------------------------  *
@@ -320,18 +303,5 @@ class GeneratorManager
         $service = new GenerateService($table);
         $service->create();
     }
-
-    /**
-     * @param Table $table
-     * @throws \Exception
-     */
-    private function generateTransformer(Table $table) {
-        if (!Helpers::isWriteable('transformer', $table->getName())) {
-            return;
-        }
-        $transformer = new GenerateTransformer($table);
-        $transformer->create();
-    }
-
 
 }

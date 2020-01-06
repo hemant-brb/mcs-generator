@@ -141,4 +141,12 @@ class Helpers
     public static function generateUniqueId($length = 9, $start = 'z') {
         return $start . Str::lower(Str::random($length - 1));
     }
+
+    public static function parseCommaSaperatedStringToArray($str, $delimiter=',')
+    {
+        return collect(explode($delimiter, $str))
+            ->map(function ($include) {
+                return trim($include);
+            });
+    }
 }

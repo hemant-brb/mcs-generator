@@ -1,14 +1,13 @@
 <?php
 
 return [
-// todo : Replace all path with laravel default paths
     /*
      |--------------------------------------------------------------------------
      | Username of the file.
      |--------------------------------------------------------------------------
      |
     */
-    'username'    => 'Hemant Saini',
+    'username'    => 'Generated',
     /*
      |
      |--------------------------------------------------------------------------
@@ -191,20 +190,5 @@ return [
         'skip_create_fields' => ['id', 'deleted_at', 'created_at', 'updated_at'],
         'skip_update_fields' => ['id', 'deleted_at', 'created_at', 'updated_at']
     ],
-
-    /*
-     |--------------------------------------------------------------------------
-     | Transformer
-     |--------------------------------------------------------------------------
-     */
-    'transformer' => [
-        'path'            => 'app/Transformers',
-        'namespace'       => 'App\Transformers',
-        'overwrite'       => true,
-        'exclude_table'   => [
-            'password_resets'
-        ],
-        'exclude_columns' => ['password', 'deleted_at', 'user_id'],
-    ]
 
 ];

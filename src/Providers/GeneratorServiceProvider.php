@@ -12,7 +12,6 @@ use Devslane\Generator\Console\Commands\GenerateRequestCommand;
 use Devslane\Generator\Console\Commands\GenerateSeederCommand;
 use Devslane\Generator\Console\Commands\GenerateServiceCommand;
 use Devslane\Generator\Console\Commands\GenerateSetupCommand;
-use Devslane\Generator\Console\Commands\GenerateTransformerCommand;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -45,7 +44,6 @@ class GeneratorServiceProvider extends ServiceProvider
         GenerateSeederCommand::class,
         GenerateServiceCommand::class,
         GenerateSetupCommand::class,
-        GenerateTransformerCommand::class
     ];
 
     /**
